@@ -78,13 +78,15 @@ export default function ResultadoPage() {
     navigate('/teste')
   }
 
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = async () => {
     if (!resultado) return
     setIsDownloadingPdf(true)
     try {
-      gerarRelatorioPDF(resultado, user)
+      await gerarRelatorioPDF(resultado, user)
+    } catch (err) {
+      console.error('Erro ao gerar relatório em PDF:', err)
     } finally {
-      setTimeout(() => setIsDownloadingPdf(false), 1000)
+      setIsDownloadingPdf(false)
     }
   }
 
