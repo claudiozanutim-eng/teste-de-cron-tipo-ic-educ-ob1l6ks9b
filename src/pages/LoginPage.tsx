@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/use-auth'
+import { testeService } from '@/services/testeService'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -32,21 +33,41 @@ export default function LoginPage() {
     }
 
     setIsLoading(true)
-    const { error } = await signIn(email.trim().toLowerCase(), password)
-    setIsLoading(false)
+    const { user, error } = await signIn(email.trim().toLowerCase(), password)
 
-    if (error) {
+    if (error || !user) {
+      setIsLoading(false)
       console.error('Erro de login:', error)
       setErrorMessage('E-mail ou senha incorretos. Verifique suas credenciais e tente novamente.')
       return
     }
 
-    // Sucesso -> Redireciona para /teste
-    navigate('/teste')
+    // Regra de Redirecionamento após login bem-sucedido:
+    // 1. Administradores (perfil admin) -> painel administrativo (/admin/dashboard)
+    // 2. Participantes que JÁ responderam -> tela do último resultado deles (/resultado)
+    // 3. Participantes que NUNCA responderam -> tela do teste Parte 1 (/teste)
+    try {
+      if (user.admin) {
+        navigate('/admin/dashboard')
+        return
+      }
+
+      const ultimo = await testeService.getUltimoResultado(user.id)
+      if (ultimo) {
+        navigate('/resultado')
+      } else {
+        navigate('/teste')
+      }
+    } catch (err) {
+      console.warn('Erro ao verificar último resultado no login, direcionando para /teste:', err)
+      navigate('/teste')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
-    <div className="flex-1 flex items-center justify-center py-6 px-2">
+    <div className="flex-1 flex items-center justify-center py-6 px-2 font-sans">
       <Card className="w-full max-w-md border border-[#2B2621]/15 shadow-[0_8px_30px_rgba(43,38,33,0.06)] rounded-3xl bg-white overflow-hidden">
         <div className="h-1.5 bg-[#E55320]" />
 
@@ -132,6 +153,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#2B2621]/50 hover:text-[#2B2621]"
+                  aria-label={showPassword ? 'Ocultar senha' : 'Exibir senha'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>

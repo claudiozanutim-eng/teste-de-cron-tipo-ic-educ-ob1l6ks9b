@@ -11,6 +11,7 @@ interface AuthContextType {
     name: string
     email: string
     password: string
+    passwordConfirm?: string
   }) => Promise<{ user?: UserRecord; error?: unknown }>
   signIn: (email: string, password: string) => Promise<{ user?: UserRecord; error?: unknown }>
   signOut: () => void
@@ -69,13 +70,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }
 
-  const signUp = async (data: { name: string; email: string; password: string }) => {
+  const signUp = async (data: {
+    name: string
+    email: string
+    password: string
+    passwordConfirm?: string
+  }) => {
     try {
       // 1. Cria usuário
       await pb.collection('users').create({
         email: data.email,
         password: data.password,
-        passwordConfirm: data.password,
+        passwordConfirm: data.passwordConfirm || data.password,
         name: data.name,
       })
 

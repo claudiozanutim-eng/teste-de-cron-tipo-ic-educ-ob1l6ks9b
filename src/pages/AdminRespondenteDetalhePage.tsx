@@ -6,11 +6,21 @@ import { PERFIS_INFO } from '@/types/cronotipo'
 import type { ResultadoRecord, RespostaRecord, UserRecord } from '@/types/cronotipo'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Calendar, Award, User, Mail, Shield, Loader2, Clock } from 'lucide-react'
+import {
+  ArrowLeft,
+  Calendar,
+  Award,
+  User,
+  Mail,
+  Shield,
+  Loader2,
+  Clock,
+  LogOut,
+} from 'lucide-react'
 
 export default function AdminRespondenteDetalhePage() {
   const { id } = useParams<{ id: string }>()
-  const { isAdmin } = useAuth()
+  const { isAdmin, signOut } = useAuth()
   const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(true)
@@ -49,9 +59,9 @@ export default function AdminRespondenteDetalhePage() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center py-20 space-y-4">
-        <Loader2 className="w-10 h-10 text-[#6C5CE7] animate-spin" />
-        <p className="text-sm font-semibold text-[#636E72]">
+      <div className="flex-1 flex flex-col items-center justify-center py-20 space-y-4 font-sans">
+        <Loader2 className="w-10 h-10 text-[#E55320] animate-spin" />
+        <p className="text-sm font-semibold text-[#2B2621]/70">
           Carregando histórico do participante...
         </p>
       </div>
@@ -60,10 +70,10 @@ export default function AdminRespondenteDetalhePage() {
 
   if (!data.user) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center py-12 text-center space-y-4">
-        <p className="text-[#636E72]">Respondente não encontrado.</p>
+      <div className="flex-1 flex flex-col items-center justify-center py-12 text-center space-y-4 font-sans">
+        <p className="text-[#2B2621]/70">Respondente não encontrado.</p>
         <Link to="/admin/dashboard">
-          <Button variant="outline" className="rounded-full">
+          <Button variant="outline" className="rounded-full border-[#2B2621]/20 text-[#2B2621]">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Voltar ao Dashboard
           </Button>
@@ -85,7 +95,7 @@ export default function AdminRespondenteDetalhePage() {
 
   return (
     <div className="flex-1 flex flex-col space-y-6 sm:space-y-8 max-w-full font-sans text-[#2B2621]">
-      {/* Botão Voltar */}
+      {/* Botão Voltar e Ações */}
       <div className="flex items-center justify-between">
         <Link to="/admin/dashboard">
           <Button
@@ -97,6 +107,19 @@ export default function AdminRespondenteDetalhePage() {
             Voltar à Lista de Respondentes
           </Button>
         </Link>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => {
+            signOut()
+            navigate('/login')
+          }}
+          className="rounded-full text-xs font-semibold text-[#2B2621]/70 hover:text-red-700 hover:bg-red-50"
+        >
+          <LogOut className="w-3.5 h-3.5 mr-1" />
+          Sair
+        </Button>
       </div>
 
       {/* Card de Informações do Participante */}
