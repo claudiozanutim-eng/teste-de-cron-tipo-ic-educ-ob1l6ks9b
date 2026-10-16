@@ -66,51 +66,63 @@ onRecordAfterCreateSuccess((e) => {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seu Resultado — Teste de Cronótipo IC Educ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter+Tight:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body style="margin:0;padding:0;background-color:#F7F5FF;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#2D3436;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#F7F5FF;padding:32px 16px;">
+<body style="margin:0;padding:0;background-color:#FAF7F1;font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#2B2621;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#FAF7F1;padding:32px 16px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" style="max-width:580px;background-color:#FFFFFF;border-radius:16px;box-shadow:0 4px 16px rgba(108,92,231,0.08);overflow:hidden;" cellspacing="0" cellpadding="0">
+        <table role="presentation" width="100%" style="max-width:580px;background-color:#FFFFFF;border-radius:24px;box-shadow:0 6px 24px rgba(43,38,33,0.06);overflow:hidden;border:1px solid rgba(43,38,33,0.12);" cellspacing="0" cellpadding="0">
           <tr>
-            <td style="background-color:#6C5CE7;padding:28px 32px;text-align:center;">
-              <h1 style="margin:0;color:#FFFFFF;font-size:24px;font-weight:700;letter-spacing:-0.5px;">IC Educ</h1>
-              <p style="margin:4px 0 0;color:#EDE9FE;font-size:14px;font-weight:500;">Teste de Cronótipo</p>
+            <td style="background-color:#2B2621;padding:28px 32px;text-align:center;">
+              <table align="center" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="width:40px;height:40px;background-color:#E55320;border-radius:50%;text-align:center;vertical-align:middle;color:#ffffff;font-weight:900;font-size:15px;font-family:sans-serif;">
+                    ic
+                  </td>
+                  <td style="padding-left:12px;text-align:left;">
+                    <h1 style="margin:0;color:#FAF7F1;font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:900;letter-spacing:-0.5px;line-height:1.1;">IC Educ</h1>
+                    <p style="margin:2px 0 0;color:#E55320;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Teste de Cronótipo</p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
           <tr>
             <td style="padding:32px;">
-              <p style="margin:0 0 16px;font-size:16px;line-height:1.5;color:#2D3436;">
+              <p style="margin:0 0 16px;font-size:16px;line-height:1.5;color:#2B2621;">
                 Olá, <strong>${userName}</strong>!
               </p>
-              <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#636E72;">
+              <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:rgba(43,38,33,0.75);">
                 Seu Teste de Cronótipo foi concluído com sucesso. Descubra abaixo seu perfil biológico de produtividade e descanso:
               </p>
-              <div style="background-color:#FAF9FF;border-left:6px solid ${config.cor};border-radius:12px;padding:24px;margin-bottom:24px;">
+              <div style="background-color:#FAF7F1;border-left:6px solid ${config.cor};border-radius:14px;padding:24px;margin-bottom:24px;border:1px solid rgba(43,38,33,0.08);border-left-width:6px;border-left-color:${config.cor};">
                 <div style="font-size:36px;line-height:1;margin-bottom:8px;">${config.emoji}</div>
-                <h2 style="margin:0 0 6px;color:${config.cor};font-size:22px;font-weight:800;">
+                <h2 style="margin:0 0 6px;color:${config.cor};font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:900;">
                   Seu perfil é: ${perfil}
                 </h2>
-                <p style="margin:0 0 12px;font-size:14px;color:#636E72;font-style:italic;">
+                <p style="margin:0 0 12px;font-size:13px;color:rgba(43,38,33,0.7);font-style:italic;">
                   ${viaParte1 ? 'Classificação direta pela Parte 1 (7+ afirmações matinais)' : `Pontuação obtida na Parte 2: ${pontuacao} pontos`}
                 </p>
-                <p style="margin:0;font-size:15px;line-height:1.65;color:#2D3436;">
+                <p style="margin:0;font-size:15px;line-height:1.65;color:#2B2621;">
                   ${config.descricao}
                 </p>
               </div>
-              <div style="background-color:#EDE9FE;border-radius:10px;padding:16px;margin-bottom:24px;">
-                <p style="margin:0;font-size:13px;line-height:1.5;color:#5A4BD1;">
-                  💡 <strong>Dica da IC Educ:</strong> Conhecer seu cronótipo permite planejar estudos, reuniões e momentos de descanso nos horários em que seu cérebro rende melhor.
+              <div style="background-color:#FAF7F1;border-radius:12px;padding:16px;margin-bottom:24px;border:1px solid rgba(229,83,32,0.25);border-left:4px solid #E55320;">
+                <p style="margin:0;font-size:13px;line-height:1.5;color:#2B2621;">
+                  💡 <strong style="color:#E55320;">Dica da IC Educ:</strong> Conhecer seu cronótipo permite planejar estudos, reuniões e momentos de descanso nos horários em que seu cérebro rende melhor.
                 </p>
               </div>
-              <p style="margin:0;font-size:14px;line-height:1.6;color:#636E72;">
+              <p style="margin:0;font-size:14px;line-height:1.6;color:rgba(43,38,33,0.7);">
                 Você pode acessar sua conta a qualquer momento para baixar seu relatório em PDF ou refazer o teste.
               </p>
             </td>
           </tr>
           <tr>
-            <td style="background-color:#F7F5FF;padding:20px 32px;text-align:center;border-top:1px solid #E0DEE8;">
-              <p style="margin:0;font-size:12px;color:#8E9296;">
+            <td style="background-color:#FAF7F1;padding:20px 32px;text-align:center;border-top:1px solid rgba(43,38,33,0.1);">
+              <p style="margin:0;font-size:12px;color:rgba(43,38,33,0.6);">
                 © IC Educ • Todos os direitos reservados.
               </p>
             </td>

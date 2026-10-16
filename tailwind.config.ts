@@ -27,10 +27,15 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter var', 'SF Pro Display', 'system-ui', 'sans-serif'],
-        display: ['SF Pro Display', 'Inter var', 'system-ui', 'sans-serif'],
+        sans: ['"Inter Tight"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['"Fraunces"', 'serif'],
+        fraunces: ['"Fraunces"', 'serif'],
+        inter: ['"Inter Tight"', 'sans-serif'],
       },
       colors: {
+        bone: '#FAF7F1',
+        grafite: '#2B2621',
+        'ic-orange': '#E55320',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

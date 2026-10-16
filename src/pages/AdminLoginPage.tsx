@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Shield, AlertCircle, Loader2, Lock, Mail, ArrowRight, Eye, EyeOff } from 'lucide-react'
+import { AlertCircle, Loader2, Lock, Mail, ArrowRight, Eye, EyeOff } from 'lucide-react'
+import icLogo from '@/assets/ic-educ-oficial-avatar-e53cf.png'
 
 export default function AdminLoginPage() {
   const { signIn, signOut } = useAuth()
@@ -48,37 +49,41 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F5FF] flex items-center justify-center p-4">
-      <Card className="w-full max-w-md border border-[#E0DEE8] shadow-[0_12px_40px_rgba(108,92,231,0.12)] rounded-3xl bg-white overflow-hidden">
-        <div className="h-2.5 bg-[#6C5CE7]" />
+    <div className="min-h-screen bg-[#FAF7F1] flex items-center justify-center p-4 font-sans text-[#2B2621]">
+      <Card className="w-full max-w-md border border-[#2B2621]/15 shadow-[0_12px_40px_rgba(43,38,33,0.08)] rounded-3xl bg-white overflow-hidden">
+        <div className="h-2 bg-[#E55320]" />
 
         <CardHeader className="text-center pt-8 pb-4">
-          <div className="mx-auto w-14 h-14 rounded-2xl bg-[#EDE9FE] flex items-center justify-center mb-3 text-[#6C5CE7] shadow-sm">
-            <Shield className="w-7 h-7" />
+          <div className="mx-auto w-16 h-16 mb-3 flex items-center justify-center">
+            <img
+              src={icLogo}
+              alt="IC Educ"
+              className="w-16 h-16 rounded-full object-contain shadow-sm"
+            />
           </div>
-          <CardTitle className="text-2xl font-black text-[#2D3436]">
+          <CardTitle className="text-2xl font-fraunces font-bold text-[#2B2621]">
             Acesso Administrativo
           </CardTitle>
-          <CardDescription className="text-xs sm:text-sm text-[#636E72]">
+          <CardDescription className="text-xs sm:text-sm text-[#2B2621]/70 font-sans">
             Painel de Gestão e Métricas • Teste de Cronótipo IC Educ
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="pt-2 pb-8 px-6 sm:px-8">
+        <CardContent className="pt-2 pb-8 px-6 sm:px-8 font-sans">
           <form onSubmit={handleSubmit} className="space-y-4">
             {errorMessage && (
-              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm flex items-start gap-2 animate-fade-in">
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm flex items-start gap-2 animate-fade-in font-sans">
                 <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-600" />
                 <span>{errorMessage}</span>
               </div>
             )}
 
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 font-sans">
               <Label
                 htmlFor="admin-email"
-                className="text-xs font-bold text-[#2D3436] flex items-center gap-1.5"
+                className="text-xs font-bold text-[#2B2621] flex items-center gap-1.5"
               >
-                <Mail className="w-3.5 h-3.5 text-[#6C5CE7]" />
+                <Mail className="w-3.5 h-3.5 text-[#E55320]" />
                 E-mail do Administrador
               </Label>
               <Input
@@ -88,16 +93,16 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-11 rounded-xl border-[#E0DEE8] focus-visible:ring-[#6C5CE7]"
+                className="h-11 rounded-xl border-[#2B2621]/20 focus-visible:ring-[#E55320] text-[#2B2621]"
               />
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 font-sans">
               <Label
                 htmlFor="admin-password"
-                className="text-xs font-bold text-[#2D3436] flex items-center gap-1.5"
+                className="text-xs font-bold text-[#2B2621] flex items-center gap-1.5"
               >
-                <Lock className="w-3.5 h-3.5 text-[#6C5CE7]" />
+                <Lock className="w-3.5 h-3.5 text-[#E55320]" />
                 Senha
               </Label>
               <div className="relative">
@@ -108,12 +113,12 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="h-11 pr-10 rounded-xl border-[#E0DEE8] focus-visible:ring-[#6C5CE7]"
+                  className="h-11 pr-10 rounded-xl border-[#2B2621]/20 focus-visible:ring-[#E55320] text-[#2B2621]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#2B2621]/50 hover:text-[#2B2621]"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -123,7 +128,7 @@ export default function AdminLoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-12 bg-[#6C5CE7] hover:bg-[#5A4BD1] text-white font-bold rounded-full shadow-[0_4px_16px_rgba(108,92,231,0.25)] hover:shadow-[0_6px_24px_rgba(108,92,231,0.35)] transition-all mt-4"
+              className="w-full h-12 bg-[#E55320] hover:bg-[#c94517] text-white font-bold rounded-full shadow-sm transition-all mt-4 font-sans"
             >
               {isLoading ? (
                 <>
@@ -139,8 +144,8 @@ export default function AdminLoginPage() {
             </Button>
           </form>
 
-          <div className="mt-6 text-center text-xs text-[#636E72] pt-4 border-t border-[#E0DEE8]">
-            <a href="/login" className="font-semibold text-[#6C5CE7] hover:underline">
+          <div className="mt-6 text-center text-xs text-[#2B2621]/70 pt-4 border-t border-[#2B2621]/10 font-sans">
+            <a href="/login" className="font-semibold text-[#E55320] hover:underline">
               ← Voltar ao login de participantes
             </a>
           </div>

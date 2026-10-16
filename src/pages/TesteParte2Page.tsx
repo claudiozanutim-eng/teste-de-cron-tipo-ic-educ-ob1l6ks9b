@@ -116,46 +116,46 @@ export default function TesteParte2Page() {
   }
 
   return (
-    <div className="flex-1 flex flex-col justify-center items-center py-4 sm:py-8 max-w-2xl mx-auto w-full">
-      {/* Barra de Progresso Superior */}
+    <div className="flex-1 flex flex-col justify-center items-center py-4 sm:py-8 max-w-2xl mx-auto w-full font-sans">
+      {/* Barra de Progresso Superior com Laranja #E55320 */}
       <div className="w-full mb-6 sm:mb-8 space-y-2">
-        <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-[#636E72]">
-          <div className="flex items-center gap-1.5 text-[#6C5CE7]">
-            <Sparkles className="w-4 h-4 text-[#6C5CE7]" />
+        <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-[#2B2621]/70">
+          <div className="flex items-center gap-1.5 text-[#E55320] font-sans">
+            <Sparkles className="w-4 h-4 text-[#E55320]" />
             <span>Parte 2 — Hábitos e Preferências</span>
           </div>
-          <span>
+          <span className="text-[#2B2621]">
             Pergunta {currentIndex + 1} de {total}
           </span>
         </div>
 
         {/* Trilho de Progresso */}
-        <div className="h-3 w-full bg-[#E0DEE8] rounded-full overflow-hidden p-0.5">
+        <div className="h-3 w-full bg-[#2B2621]/10 rounded-full overflow-hidden p-0.5">
           <div
-            className="h-full bg-gradient-to-r from-[#6C5CE7] to-[#8E44AD] rounded-full transition-all duration-300 ease-out"
+            className="h-full bg-[#E55320] rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>
 
       {/* Card da Pergunta Atual */}
-      <Card className="w-full border border-[#E0DEE8] shadow-[0_8px_30px_rgba(108,92,231,0.08)] rounded-2xl bg-white overflow-hidden transition-all">
+      <Card className="w-full border border-[#2B2621]/15 shadow-[0_8px_30px_rgba(43,38,33,0.06)] rounded-3xl bg-white overflow-hidden transition-all">
         <CardContent className="p-6 sm:p-8 flex flex-col space-y-6">
           <div className="space-y-3">
-            <span className="inline-block px-3 py-1 rounded-full bg-[#EDE9FE] text-[#6C5CE7] text-xs font-black uppercase tracking-wider">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#FAF7F1] border border-[#2B2621]/20 text-[#2B2621] text-xs font-bold uppercase tracking-wider font-sans">
               Pergunta #{currentPergunta.numero}
             </span>
 
             <h2
               key={currentPergunta.numero}
-              className="text-xl sm:text-2xl font-extrabold text-[#2D3436] leading-snug animate-slide-in-right"
+              className="text-xl sm:text-2xl font-fraunces font-bold text-[#2B2621] leading-snug animate-slide-in-right"
             >
               {currentPergunta.enunciado}
             </h2>
           </div>
 
           {/* Opções de múltipla escolha (3 opções empilhadas) */}
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-2 font-sans">
             {currentPergunta.opcoes.map((opcao, idx) => {
               const isSelected = selectedOptionIndex === idx
               const letras = ['A', 'B', 'C']
@@ -166,23 +166,23 @@ export default function TesteParte2Page() {
                   key={idx}
                   disabled={isTransitioning || isFinishing}
                   onClick={() => handleSelectOption(idx)}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center justify-between gap-3 cursor-pointer select-none ${
+                  className={`w-full text-left p-4 rounded-2xl border-2 transition-all flex items-center justify-between gap-3 cursor-pointer select-none ${
                     isSelected
-                      ? 'border-[#6C5CE7] bg-[#EDE9FE]/50 shadow-[0_4px_16px_rgba(108,92,231,0.15)] scale-[1.01]'
-                      : 'border-[#E0DEE8] bg-white hover:border-[#6C5CE7]/40 hover:bg-[#F7F5FF] shadow-sm hover:translate-y-[-1px]'
+                      ? 'border-[#E55320] bg-[#FAF7F1] shadow-sm scale-[1.01]'
+                      : 'border-[#2B2621]/15 bg-white hover:border-[#E55320]/50 hover:bg-[#FAF7F1]/50 shadow-sm hover:translate-y-[-1px]'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <span
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors shrink-0 ${
                         isSelected
-                          ? 'bg-[#6C5CE7] text-white shadow-sm'
-                          : 'bg-[#F7F5FF] text-[#636E72] border border-[#E0DEE8]'
+                          ? 'bg-[#E55320] text-white shadow-sm'
+                          : 'bg-[#FAF7F1] text-[#2B2621] border border-[#2B2621]/20'
                       }`}
                     >
                       {letras[idx]}
                     </span>
-                    <span className="text-sm sm:text-base font-semibold text-[#2D3436] leading-snug">
+                    <span className="text-sm sm:text-base font-semibold text-[#2B2621] leading-snug font-sans">
                       {opcao.texto}
                     </span>
                   </div>
@@ -190,8 +190,8 @@ export default function TesteParte2Page() {
                   <div
                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
                       isSelected
-                        ? 'border-[#6C5CE7] bg-[#6C5CE7] text-white scale-110'
-                        : 'border-[#E0DEE8] bg-white'
+                        ? 'border-[#E55320] bg-[#E55320] text-white scale-110'
+                        : 'border-[#2B2621]/20 bg-white'
                     }`}
                   >
                     {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -207,7 +207,7 @@ export default function TesteParte2Page() {
               type="button"
               onClick={handleNext}
               disabled={selectedOptionIndex === null || isTransitioning || isFinishing}
-              className="h-12 px-8 bg-[#6C5CE7] hover:bg-[#5A4BD1] text-white font-bold rounded-full shadow-[0_4px_14px_rgba(108,92,231,0.25)] hover:shadow-[0_6px_20px_rgba(108,92,231,0.35)] transition-all disabled:opacity-40"
+              className="h-12 px-8 bg-[#E55320] hover:bg-[#c94517] text-white font-bold rounded-full shadow-sm transition-all disabled:opacity-40 font-sans"
             >
               {isFinishing ? (
                 <>

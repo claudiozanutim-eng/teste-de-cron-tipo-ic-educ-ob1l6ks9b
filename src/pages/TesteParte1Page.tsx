@@ -98,66 +98,66 @@ export default function TesteParte1Page() {
   }
 
   return (
-    <div className="flex-1 flex flex-col justify-center items-center py-4 sm:py-8 max-w-2xl mx-auto w-full">
-      {/* Barra de Progresso Superior */}
+    <div className="flex-1 flex flex-col justify-center items-center py-4 sm:py-8 max-w-2xl mx-auto w-full font-sans">
+      {/* Barra de Progresso Superior com Laranja #E55320 */}
       <div className="w-full mb-6 sm:mb-8 space-y-2">
-        <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-[#636E72]">
-          <div className="flex items-center gap-1.5 text-[#6C5CE7]">
-            <Sparkles className="w-4 h-4 text-[#6C5CE7]" />
+        <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-[#2B2621]/70">
+          <div className="flex items-center gap-1.5 text-[#E55320] font-sans">
+            <Sparkles className="w-4 h-4 text-[#E55320]" />
             <span>Parte 1 — Afirmações Matinais</span>
           </div>
-          <span>
+          <span className="text-[#2B2621]">
             Afirmação {currentIndex + 1} de {total}
           </span>
         </div>
 
         {/* Trilho de Progresso */}
-        <div className="h-3 w-full bg-[#E0DEE8] rounded-full overflow-hidden p-0.5">
+        <div className="h-3 w-full bg-[#2B2621]/10 rounded-full overflow-hidden p-0.5">
           <div
-            className="h-full bg-gradient-to-r from-[#6C5CE7] to-[#8E44AD] rounded-full transition-all duration-300 ease-out"
+            className="h-full bg-[#E55320] rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>
 
       {/* Card da Afirmação Atual */}
-      <Card className="w-full border border-[#E0DEE8] shadow-[0_8px_30px_rgba(108,92,231,0.08)] rounded-2xl bg-white overflow-hidden transition-all">
+      <Card className="w-full border border-[#2B2621]/15 shadow-[0_8px_30px_rgba(43,38,33,0.06)] rounded-3xl bg-white overflow-hidden transition-all">
         <CardContent className="p-6 sm:p-10 flex flex-col items-center text-center space-y-8 min-h-[300px] justify-between">
           <div className="space-y-4">
-            <span className="inline-block px-3 py-1 rounded-full bg-[#EDE9FE] text-[#6C5CE7] text-xs font-black uppercase tracking-wider">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#FAF7F1] border border-[#2B2621]/20 text-[#2B2621] text-xs font-bold uppercase tracking-wider font-sans">
               Afirmação #{currentAfirmacao.numero}
             </span>
 
             <h2
               key={currentAfirmacao.numero}
-              className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#2D3436] leading-snug animate-slide-in-right px-2"
+              className="text-xl sm:text-2xl md:text-3xl font-fraunces font-bold text-[#2B2621] leading-snug animate-slide-in-right px-2"
             >
               "{currentAfirmacao.texto}"
             </h2>
           </div>
 
-          <p className="text-xs sm:text-sm text-[#636E72] max-w-md">
+          <p className="text-xs sm:text-sm text-[#2B2621]/70 max-w-md font-sans">
             Essa afirmação descreve bem a sua rotina habitual e como você se sente no dia a dia?
           </p>
 
           {/* Botões Verdadeiro e Falso lado a lado */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 w-full pt-2">
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 w-full pt-2 font-sans">
             {/* Botão Verdadeiro */}
             <button
               type="button"
               disabled={isTransitioning || isFinishing}
               onClick={() => handleSelect('Verdadeiro')}
-              className={`group relative flex items-center justify-center gap-2 py-4 px-4 sm:px-6 rounded-2xl font-black text-base sm:text-lg transition-all duration-200 border-2 cursor-pointer shadow-md select-none ${
+              className={`group relative flex items-center justify-center gap-2 py-4 px-4 sm:px-6 rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 border-2 cursor-pointer shadow-sm select-none ${
                 clickedOption === 'Verdadeiro'
-                  ? 'bg-[#27AE60] text-white border-[#27AE60] scale-95 shadow-inner'
-                  : 'bg-white hover:bg-[#27AE60]/10 text-[#27AE60] border-[#27AE60] hover:scale-[1.02] active:scale-95'
+                  ? 'bg-[#E55320] text-white border-[#E55320] scale-95 shadow-inner'
+                  : 'bg-white hover:bg-[#FAF7F1] text-[#2B2621] border-[#2B2621]/20 hover:border-[#E55320] hover:text-[#E55320] hover:scale-[1.02] active:scale-95'
               }`}
             >
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
                   clickedOption === 'Verdadeiro'
-                    ? 'bg-white text-[#27AE60]'
-                    : 'bg-[#27AE60] text-white'
+                    ? 'bg-white text-[#E55320]'
+                    : 'bg-[#2B2621] text-white'
                 }`}
               >
                 <Check className="w-4 h-4 stroke-[3]" />
@@ -170,15 +170,17 @@ export default function TesteParte1Page() {
               type="button"
               disabled={isTransitioning || isFinishing}
               onClick={() => handleSelect('Falso')}
-              className={`group relative flex items-center justify-center gap-2 py-4 px-4 sm:px-6 rounded-2xl font-black text-base sm:text-lg transition-all duration-200 border-2 cursor-pointer shadow-md select-none ${
+              className={`group relative flex items-center justify-center gap-2 py-4 px-4 sm:px-6 rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 border-2 cursor-pointer shadow-sm select-none ${
                 clickedOption === 'Falso'
-                  ? 'bg-[#E74C3C] text-white border-[#E74C3C] scale-95 shadow-inner'
-                  : 'bg-white hover:bg-[#E74C3C]/10 text-[#E74C3C] border-[#E74C3C] hover:scale-[1.02] active:scale-95'
+                  ? 'bg-[#2B2621] text-white border-[#2B2621] scale-95 shadow-inner'
+                  : 'bg-white hover:bg-[#FAF7F1] text-[#2B2621] border-[#2B2621]/20 hover:scale-[1.02] active:scale-95'
               }`}
             >
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
-                  clickedOption === 'Falso' ? 'bg-white text-[#E74C3C]' : 'bg-[#E74C3C] text-white'
+                  clickedOption === 'Falso'
+                    ? 'bg-[#FAF7F1] text-[#2B2621]'
+                    : 'bg-[#2B2621]/20 text-[#2B2621]'
                 }`}
               >
                 <X className="w-4 h-4 stroke-[3]" />
@@ -191,14 +193,14 @@ export default function TesteParte1Page() {
 
       {/* Indicador de status final */}
       {isFinishing && (
-        <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-[#6C5CE7] animate-fade-in">
+        <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-[#E55320] animate-fade-in font-sans">
           <Loader2 className="w-4 h-4 animate-spin" />
           <span>Calculando e avançando...</span>
         </div>
       )}
 
       {/* Legenda explicativa de regra */}
-      <div className="mt-6 text-center text-xs text-[#636E72] px-4">
+      <div className="mt-6 text-center text-xs text-[#2B2621]/70 px-4 font-sans">
         Responda com sinceridade. Suas escolhas revelam como funciona seu relógio biológico.
       </div>
     </div>

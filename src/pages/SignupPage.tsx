@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { LegalModals } from '@/components/LegalModals'
-import { Check, AlertCircle, Loader2, Lock, Mail, User, Eye, EyeOff, Sparkles } from 'lucide-react'
+import { Check, AlertCircle, Loader2, Lock, Mail, User, Eye, EyeOff } from 'lucide-react'
+import icLogo from '@/assets/ic-educ-oficial-avatar-e53cf.png'
 
 export default function SignupPage() {
   const { signUp } = useAuth()
@@ -90,14 +91,20 @@ export default function SignupPage() {
   return (
     <div className="flex-1 flex items-center justify-center py-6 px-2">
       <Card className="w-full max-w-md border border-[#E0DEE8] shadow-[0_8px_30px_rgba(108,92,231,0.08)] rounded-2xl bg-white overflow-hidden">
-        <div className="h-2 bg-gradient-to-r from-[#6C5CE7] via-[#8E44AD] to-[#F39C12]" />
+        <div className="h-1.5 bg-[#E55320]" />
 
-        <CardHeader className="text-center pt-6 pb-4">
-          <div className="mx-auto w-12 h-12 rounded-2xl bg-[#EDE9FE] flex items-center justify-center mb-3">
-            <Sparkles className="w-6 h-6 text-[#6C5CE7]" />
+        <CardHeader className="text-center pt-8 pb-4">
+          <div className="mx-auto w-16 h-16 mb-3 flex items-center justify-center">
+            <img
+              src={icLogo}
+              alt="IC Educ"
+              className="w-16 h-16 rounded-full object-contain shadow-sm"
+            />
           </div>
-          <CardTitle className="text-2xl font-black text-[#2D3436]">Crie sua conta</CardTitle>
-          <CardDescription className="text-sm text-[#636E72]">
+          <CardTitle className="text-2xl sm:text-[25px] font-fraunces font-bold text-[#2B2621] tracking-tight">
+            Crie sua conta
+          </CardTitle>
+          <CardDescription className="text-sm text-[#2B2621]/70 mt-1 font-sans">
             Descubra seu perfil circadiano no Teste de Cronótipo IC Educ
           </CardDescription>
         </CardHeader>
@@ -112,12 +119,12 @@ export default function SignupPage() {
             )}
 
             {/* Nome Completo */}
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 font-sans">
               <Label
                 htmlFor="name"
-                className="text-xs font-bold text-[#2D3436] flex items-center gap-1.5"
+                className="text-xs font-bold text-[#2B2621] flex items-center gap-1.5"
               >
-                <User className="w-3.5 h-3.5 text-[#6C5CE7]" />
+                <User className="w-3.5 h-3.5 text-[#E55320]" />
                 Nome Completo
               </Label>
               <Input
@@ -127,17 +134,17 @@ export default function SignupPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="h-11 rounded-xl border-[#E0DEE8] focus-visible:ring-[#6C5CE7]"
+                className="h-11 rounded-xl border-[#2B2621]/20 focus-visible:ring-[#E55320] text-[#2B2621]"
               />
             </div>
 
             {/* Email */}
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 font-sans">
               <Label
                 htmlFor="email"
-                className="text-xs font-bold text-[#2D3436] flex items-center gap-1.5"
+                className="text-xs font-bold text-[#2B2621] flex items-center gap-1.5"
               >
-                <Mail className="w-3.5 h-3.5 text-[#6C5CE7]" />
+                <Mail className="w-3.5 h-3.5 text-[#E55320]" />
                 Endereço de E-mail
               </Label>
               <Input
@@ -147,17 +154,17 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-11 rounded-xl border-[#E0DEE8] focus-visible:ring-[#6C5CE7]"
+                className="h-11 rounded-xl border-[#2B2621]/20 focus-visible:ring-[#E55320] text-[#2B2621]"
               />
             </div>
 
             {/* Senha */}
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 font-sans">
               <Label
                 htmlFor="password"
-                className="text-xs font-bold text-[#2D3436] flex items-center gap-1.5"
+                className="text-xs font-bold text-[#2B2621] flex items-center gap-1.5"
               >
-                <Lock className="w-3.5 h-3.5 text-[#6C5CE7]" />
+                <Lock className="w-3.5 h-3.5 text-[#E55320]" />
                 Senha (mínimo 8 caracteres)
               </Label>
               <div className="relative">
@@ -168,12 +175,12 @@ export default function SignupPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="h-11 pr-10 rounded-xl border-[#E0DEE8] focus-visible:ring-[#6C5CE7]"
+                  className="h-11 pr-10 rounded-xl border-[#2B2621]/20 focus-visible:ring-[#E55320] text-[#2B2621]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#2B2621]/50 hover:text-[#2B2621]"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -182,13 +189,13 @@ export default function SignupPage() {
               {/* Indicador de força */}
               {password.length > 0 && (
                 <div className="pt-1 space-y-1">
-                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-1.5 w-full bg-[#FAF7F1] border border-[#2B2621]/10 rounded-full overflow-hidden">
                     <div
                       className={`h-full transition-all duration-300 ${strength.color}`}
                       style={{ width: `${strength.percent}%` }}
                     />
                   </div>
-                  <div className="flex justify-between items-center text-[11px] text-[#636E72]">
+                  <div className="flex justify-between items-center text-[11px] text-[#2B2621]/70">
                     <span>
                       Força: <strong>{strength.label}</strong>
                     </span>
@@ -199,14 +206,14 @@ export default function SignupPage() {
             </div>
 
             {/* Checkbox Obrigatório dos Termos */}
-            <div className="pt-2">
-              <label className="flex items-start gap-2.5 text-xs text-[#2D3436] cursor-pointer select-none leading-relaxed">
+            <div className="pt-2 font-sans">
+              <label className="flex items-start gap-2.5 text-xs text-[#2B2621] cursor-pointer select-none leading-relaxed">
                 <div className="relative flex items-center mt-0.5">
                   <input
                     type="checkbox"
                     checked={acceptedTerms}
                     onChange={(e) => setAcceptedTerms(e.target.checked)}
-                    className="w-4 h-4 rounded border-[#E0DEE8] text-[#6C5CE7] focus:ring-[#6C5CE7] cursor-pointer accent-[#6C5CE7]"
+                    className="w-4 h-4 rounded border-[#2B2621]/30 text-[#E55320] focus:ring-[#E55320] cursor-pointer accent-[#E55320]"
                   />
                 </div>
                 <span>
@@ -214,7 +221,7 @@ export default function SignupPage() {
                   <button
                     type="button"
                     onClick={() => setTermsModalOpen(true)}
-                    className="font-bold text-[#6C5CE7] hover:underline"
+                    className="font-bold text-[#E55320] hover:underline"
                   >
                     Termos de Uso
                   </button>{' '}
@@ -222,7 +229,7 @@ export default function SignupPage() {
                   <button
                     type="button"
                     onClick={() => setPrivacyModalOpen(true)}
-                    className="font-bold text-[#6C5CE7] hover:underline"
+                    className="font-bold text-[#E55320] hover:underline"
                   >
                     Política de Privacidade
                   </button>
@@ -235,7 +242,7 @@ export default function SignupPage() {
             <Button
               type="submit"
               disabled={!canSubmit || isLoading}
-              className="w-full h-11 bg-[#6C5CE7] hover:bg-[#5A4BD1] text-white font-bold rounded-full shadow-[0_4px_14px_rgba(108,92,231,0.25)] hover:shadow-[0_6px_20px_rgba(108,92,231,0.35)] transition-all mt-4 disabled:opacity-50"
+              className="w-full h-11 bg-[#E55320] hover:bg-[#c94517] text-white font-bold rounded-full shadow-sm transition-all mt-4 disabled:opacity-50 font-sans"
             >
               {isLoading ? (
                 <>
@@ -252,9 +259,9 @@ export default function SignupPage() {
           </form>
 
           {/* Link para Login */}
-          <div className="mt-6 text-center text-xs text-[#636E72] pt-4 border-t border-[#E0DEE8]">
+          <div className="mt-6 text-center text-xs text-[#2B2621]/70 pt-4 border-t border-[#2B2621]/10 font-sans">
             Já tem uma conta?{' '}
-            <Link to="/login" className="font-bold text-[#6C5CE7] hover:underline">
+            <Link to="/login" className="font-bold text-[#E55320] hover:underline">
               Fazer login
             </Link>
           </div>

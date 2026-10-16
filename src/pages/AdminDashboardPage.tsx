@@ -14,12 +14,12 @@ import {
   Search,
   ChevronLeft,
   ChevronRight,
-  Shield,
   Eye,
   Loader2,
   RefreshCw,
   LogOut,
 } from 'lucide-react'
+import icLogo from '@/assets/ic-educ-oficial-avatar-e53cf.png'
 
 interface RespondenteItem {
   id: string
@@ -180,9 +180,9 @@ export default function AdminDashboardPage() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center py-20 space-y-4">
-        <Loader2 className="w-10 h-10 text-[#6C5CE7] animate-spin" />
-        <p className="text-sm font-semibold text-[#636E72]">Carregando painel analítico...</p>
+      <div className="flex-1 flex flex-col items-center justify-center py-20 space-y-4 font-sans">
+        <Loader2 className="w-10 h-10 text-[#E55320] animate-spin" />
+        <p className="text-sm font-semibold text-[#2B2621]/70">Carregando painel analítico...</p>
       </div>
     )
   }
@@ -190,30 +190,32 @@ export default function AdminDashboardPage() {
   const perfisOrdem: PerfilCronotipo[] = ['Golfinho', 'Leão', 'Urso', 'Lobo']
 
   return (
-    <div className="flex-1 flex flex-col space-y-6 sm:space-y-8 max-w-full">
+    <div className="flex-1 flex flex-col space-y-6 sm:space-y-8 max-w-full font-sans text-[#2B2621]">
       {/* Topo do Painel */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-[#E0DEE8] shadow-[0_2px_8px_rgba(108,92,231,0.04)]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 rounded-3xl border border-[#2B2621]/15 shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#EDE9FE] flex items-center justify-center text-[#6C5CE7] shrink-0 font-bold">
-            <Shield className="w-5 h-5" />
-          </div>
+          <img
+            src={icLogo}
+            alt="IC Educ"
+            className="w-11 h-11 rounded-full object-contain shrink-0"
+          />
           <div>
-            <h1 className="text-xl sm:text-2xl font-black text-[#2D3436] tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-fraunces font-bold text-[#2B2621] tracking-tight">
               Painel do Administrador
             </h1>
-            <p className="text-xs sm:text-sm text-[#636E72]">
+            <p className="text-xs sm:text-sm text-[#2B2621]/70 font-sans">
               Gestão de participantes e métricas de cronótipo IC Educ
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5 w-full sm:w-auto">
+        <div className="flex items-center gap-2.5 w-full sm:w-auto font-sans">
           <Button
             variant="outline"
             size="sm"
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="rounded-full text-xs font-semibold border-[#E0DEE8]"
+            className="rounded-full text-xs font-semibold border-[#2B2621]/20 text-[#2B2621]"
           >
             <RefreshCw className={`w-3.5 h-3.5 mr-1.5 ${isRefreshing ? 'animate-spin' : ''}`} />
             Atualizar
@@ -222,7 +224,7 @@ export default function AdminDashboardPage() {
           <Button
             onClick={exportarCSV}
             size="sm"
-            className="bg-[#27AE60] hover:bg-[#219653] text-white font-bold rounded-full text-xs shadow-sm"
+            className="bg-[#E55320] hover:bg-[#c94517] text-white font-bold rounded-full text-xs shadow-sm"
           >
             <Download className="w-3.5 h-3.5 mr-1.5" />
             Exportar CSV
@@ -232,7 +234,7 @@ export default function AdminDashboardPage() {
             variant="ghost"
             size="sm"
             onClick={handleSignOutAdmin}
-            className="rounded-full text-xs font-semibold text-[#E74C3C] hover:bg-red-50"
+            className="rounded-full text-xs font-semibold text-[#2B2621]/70 hover:text-red-700 hover:bg-red-50"
           >
             <LogOut className="w-3.5 h-3.5 mr-1" />
             Sair
@@ -241,35 +243,35 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Cartões de Métricas no Topo */}
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 font-sans">
         {/* Total Usuários Cadastrados */}
-        <Card className="border border-[#E0DEE8] rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border border-[#2B2621]/15 rounded-3xl bg-white shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
-            <div className="flex items-center justify-between text-[#636E72]">
+            <div className="flex items-center justify-between text-[#2B2621]/60">
               <span className="text-[11px] font-bold uppercase tracking-wider">Respondentes</span>
-              <Users className="w-4 h-4 text-[#6C5CE7]" />
+              <Users className="w-4 h-4 text-[#E55320]" />
             </div>
             <div className="mt-2">
-              <span className="text-2xl sm:text-3xl font-black text-[#2D3436]">
+              <span className="text-2xl sm:text-3xl font-fraunces font-bold text-[#2B2621]">
                 {estatisticas.totalUsuarios}
               </span>
-              <span className="text-[10px] text-[#636E72] block mt-0.5">cadastrados</span>
+              <span className="text-[10px] text-[#2B2621]/60 block mt-0.5">cadastrados</span>
             </div>
           </CardContent>
         </Card>
 
         {/* Total Tentativas Realizadas */}
-        <Card className="border border-[#E0DEE8] rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border border-[#2B2621]/15 rounded-3xl bg-white shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
-            <div className="flex items-center justify-between text-[#636E72]">
+            <div className="flex items-center justify-between text-[#2B2621]/60">
               <span className="text-[11px] font-bold uppercase tracking-wider">Testes Feitos</span>
-              <CheckSquare className="w-4 h-4 text-[#6C5CE7]" />
+              <CheckSquare className="w-4 h-4 text-[#E55320]" />
             </div>
             <div className="mt-2">
-              <span className="text-2xl sm:text-3xl font-black text-[#2D3436]">
+              <span className="text-2xl sm:text-3xl font-fraunces font-bold text-[#2B2621]">
                 {estatisticas.totalTentativas}
               </span>
-              <span className="text-[10px] text-[#636E72] block mt-0.5">tentativas totais</span>
+              <span className="text-[10px] text-[#2B2621]/60 block mt-0.5">tentativas totais</span>
             </div>
           </CardContent>
         </Card>
@@ -283,21 +285,24 @@ export default function AdminDashboardPage() {
           return (
             <Card
               key={p}
-              className="border rounded-2xl bg-white shadow-sm hover:shadow-md transition-all"
+              className="border border-[#2B2621]/15 rounded-3xl bg-white shadow-sm hover:shadow-md transition-all overflow-hidden"
               style={{ borderTop: `4px solid ${info.cor}` }}
             >
               <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#636E72]">
+                  <span className="text-[11px] font-fraunces font-bold uppercase tracking-wider text-[#2B2621]/70">
                     {p}
                   </span>
                   <span className="text-lg">{info.emoji}</span>
                 </div>
                 <div className="mt-2">
-                  <span className="text-2xl sm:text-3xl font-black" style={{ color: info.cor }}>
+                  <span
+                    className="text-2xl sm:text-3xl font-fraunces font-bold"
+                    style={{ color: info.cor }}
+                  >
                     {qtd}
                   </span>
-                  <span className="text-[11px] font-semibold text-[#636E72] block mt-0.5">
+                  <span className="text-[11px] font-semibold text-[#2B2621]/60 block mt-0.5 font-sans">
                     {pct}% do total
                   </span>
                 </div>
@@ -307,17 +312,17 @@ export default function AdminDashboardPage() {
         })}
       </div>
 
-      {/* Gráfico de Barras Horizontais (HTML/CSS Puro) */}
-      <Card className="border border-[#E0DEE8] rounded-2xl bg-white shadow-sm">
+      {/* Gráfico de Barras Horizontais */}
+      <Card className="border border-[#2B2621]/15 rounded-3xl bg-white shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base sm:text-lg font-bold text-[#2D3436]">
+          <CardTitle className="text-base sm:text-lg font-fraunces font-bold text-[#2B2621]">
             Distribuição Percentual dos Cronótipos
           </CardTitle>
-          <CardDescription className="text-xs sm:text-sm text-[#636E72]">
+          <CardDescription className="text-xs sm:text-sm text-[#2B2621]/70 font-sans">
             Proporção de perfis biológicos entre todas as tentativas registradas
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 pt-2">
+        <CardContent className="space-y-4 pt-2 font-sans">
           {perfisOrdem.map((perfil) => {
             const info = PERFIS_INFO[perfil]
             const qtd = estatisticas.contagemPorPerfil[perfil] || 0
@@ -328,18 +333,18 @@ export default function AdminDashboardPage() {
                 <div className="flex justify-between items-center text-xs sm:text-sm font-semibold">
                   <div className="flex items-center gap-2">
                     <span>{info.emoji}</span>
-                    <span className="font-bold text-[#2D3436]">{perfil}</span>
-                    <span className="text-xs text-[#636E72]">
+                    <span className="font-fraunces font-bold text-[#2B2621]">{perfil}</span>
+                    <span className="text-xs text-[#2B2621]/60">
                       ({qtd} {qtd === 1 ? 'teste' : 'testes'})
                     </span>
                   </div>
-                  <span className="font-black" style={{ color: info.cor }}>
+                  <span className="font-bold" style={{ color: info.cor }}>
                     {pct}%
                   </span>
                 </div>
 
                 {/* Barra com animação de preenchimento */}
-                <div className="h-4 w-full bg-[#F7F5FF] rounded-full overflow-hidden p-0.5 border border-[#E0DEE8]/70">
+                <div className="h-3 w-full bg-[#FAF7F1] rounded-full overflow-hidden p-0.5 border border-[#2B2621]/10">
                   <div
                     className="h-full rounded-full transition-all duration-700 ease-out"
                     style={{
@@ -355,20 +360,20 @@ export default function AdminDashboardPage() {
       </Card>
 
       {/* Tabela de Respondentes com Busca e Paginação */}
-      <Card className="border border-[#E0DEE8] rounded-2xl bg-white shadow-sm overflow-hidden">
-        <CardHeader className="pb-4 border-b border-[#E0DEE8]/60">
+      <Card className="border border-[#2B2621]/15 rounded-3xl bg-white shadow-sm overflow-hidden font-sans">
+        <CardHeader className="pb-4 border-b border-[#2B2621]/10">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
-              <CardTitle className="text-base sm:text-lg font-bold text-[#2D3436]">
+              <CardTitle className="text-base sm:text-lg font-fraunces font-bold text-[#2B2621]">
                 Lista de Respondentes
               </CardTitle>
-              <CardDescription className="text-xs sm:text-sm text-[#636E72]">
+              <CardDescription className="text-xs sm:text-sm text-[#2B2621]/70 font-sans">
                 Total de {respondentesFiltrados.length} participante(s) encontrado(s)
               </CardDescription>
             </div>
 
             {/* Campo de Busca em Tempo Real */}
-            <div className="relative w-full sm:w-72">
+            <div className="relative w-full sm:w-72 font-sans">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <Input
                 type="text"
@@ -378,7 +383,7 @@ export default function AdminDashboardPage() {
                   setSearchTerm(e.target.value)
                   setCurrentPage(1)
                 }}
-                className="pl-9 h-10 text-xs sm:text-sm rounded-full border-[#E0DEE8] focus-visible:ring-[#6C5CE7]"
+                className="pl-9 h-10 text-xs sm:text-sm rounded-full border-[#2B2621]/20 focus-visible:ring-[#E55320] text-[#2B2621]"
               />
             </div>
           </div>
@@ -387,7 +392,7 @@ export default function AdminDashboardPage() {
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-[#FAF9FF] text-[#636E72] font-bold border-b border-[#E0DEE8] uppercase text-[11px] tracking-wider">
+              <thead className="bg-[#FAF7F1] text-[#2B2621]/70 font-bold border-b border-[#2B2621]/10 uppercase text-[11px] tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Nome</th>
                   <th className="py-3 px-4">E-mail</th>
@@ -397,10 +402,10 @@ export default function AdminDashboardPage() {
                   <th className="py-3 px-4 text-right">Ação</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E0DEE8]/70">
+              <tbody className="divide-y divide-[#2B2621]/10">
                 {paginatedRespondentes.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-8 text-center text-[#636E72]">
+                    <td colSpan={6} className="py-8 text-center text-[#2B2621]/60">
                       Nenhum respondente encontrado.
                     </td>
                   </tr>
@@ -409,13 +414,13 @@ export default function AdminDashboardPage() {
                     const info = resp.perfil !== '-' ? PERFIS_INFO[resp.perfil] : null
 
                     return (
-                      <tr key={resp.id} className="hover:bg-[#F7F5FF]/70 transition-colors">
-                        <td className="py-3.5 px-4 font-bold text-[#2D3436]">{resp.nome}</td>
-                        <td className="py-3.5 px-4 text-[#636E72]">{resp.email}</td>
+                      <tr key={resp.id} className="hover:bg-[#FAF7F1]/80 transition-colors">
+                        <td className="py-3.5 px-4 font-bold text-[#2B2621]">{resp.nome}</td>
+                        <td className="py-3.5 px-4 text-[#2B2621]/70">{resp.email}</td>
                         <td className="py-3.5 px-4">
                           {info ? (
                             <span
-                              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold"
+                              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-fraunces font-bold"
                               style={{
                                 backgroundColor: `${info.cor}18`,
                                 color: info.cor,
@@ -428,9 +433,9 @@ export default function AdminDashboardPage() {
                             <span className="text-gray-400 font-medium">Pendente</span>
                           )}
                         </td>
-                        <td className="py-3.5 px-4 text-[#636E72]">{resp.dataTeste}</td>
+                        <td className="py-3.5 px-4 text-[#2B2621]/70">{resp.dataTeste}</td>
                         <td className="py-3.5 px-4">
-                          <span className="inline-block px-2 py-0.5 rounded-md text-[11px] font-semibold bg-gray-100 text-[#2D3436]">
+                          <span className="inline-block px-2 py-0.5 rounded-md text-[11px] font-semibold bg-[#FAF7F1] border border-[#2B2621]/10 text-[#2B2621]">
                             {resp.totalTentativas > 0
                               ? `${resp.totalTentativas} tentativa(s)`
                               : 'Não realizou'}
@@ -441,7 +446,7 @@ export default function AdminDashboardPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-8 text-xs font-semibold text-[#6C5CE7] hover:bg-[#EDE9FE] rounded-full px-3"
+                              className="h-8 text-xs font-semibold text-[#E55320] hover:bg-[#E55320]/10 rounded-full px-3"
                             >
                               <Eye className="w-3.5 h-3.5 mr-1" />
                               Detalhes
@@ -457,7 +462,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Paginação */}
-          <div className="flex items-center justify-between p-4 border-t border-[#E0DEE8] text-xs text-[#636E72]">
+          <div className="flex items-center justify-between p-4 border-t border-[#2B2621]/10 text-xs text-[#2B2621]/70">
             <span>
               Página <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
             </span>
@@ -468,7 +473,7 @@ export default function AdminDashboardPage() {
                 size="sm"
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage <= 1}
-                className="h-8 rounded-full border-[#E0DEE8]"
+                className="h-8 rounded-full border-[#2B2621]/20 text-[#2B2621]"
               >
                 <ChevronLeft className="w-4 h-4 mr-1" />
                 Anterior
@@ -478,7 +483,7 @@ export default function AdminDashboardPage() {
                 size="sm"
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage >= totalPages}
-                className="h-8 rounded-full border-[#E0DEE8]"
+                className="h-8 rounded-full border-[#2B2621]/20 text-[#2B2621]"
               >
                 Próxima
                 <ChevronRight className="w-4 h-4 ml-1" />
