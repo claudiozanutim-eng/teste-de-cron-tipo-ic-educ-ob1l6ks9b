@@ -1,5 +1,13 @@
 export type PerfilCronotipo = 'Golfinho' | 'Leão' | 'Urso' | 'Lobo'
 
+export interface TurmaRecord {
+  id: string
+  nome: string
+  data?: string
+  created: string
+  updated: string
+}
+
 export interface UserRecord {
   id: string
   email: string
@@ -7,9 +15,13 @@ export interface UserRecord {
   avatar?: string
   admin?: boolean
   ultimo_perfil?: PerfilCronotipo
+  turma?: string
   created: string
   updated: string
   verified: boolean
+  expand?: {
+    turma?: TurmaRecord
+  }
 }
 
 export interface RespostaRecord {
@@ -30,10 +42,12 @@ export interface ResultadoRecord {
   perfil: PerfilCronotipo
   pontuacao: number
   via_parte1: boolean
+  turma?: string
   created: string
   updated: string
   expand?: {
     usuario?: UserRecord
+    turma?: TurmaRecord
   }
 }
 

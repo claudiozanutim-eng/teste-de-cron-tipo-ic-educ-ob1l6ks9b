@@ -4,6 +4,7 @@ import type {
   ResultadoRecord,
   PerfilCronotipo,
   UserRecord,
+  TurmaRecord,
 } from '@/types/cronotipo'
 
 export const testeService = {
@@ -43,13 +44,32 @@ export const testeService = {
     perfil: PerfilCronotipo
     pontuacao: number
     viaParte1: boolean
+    turmaId?: string
   }): Promise<ResultadoRecord> {
-    const record = await pb.collection('resultados').create({
+    // Se turmaId não fornecido, busca turma atual do usuário
+    let turma = params.turmaId
+    if (!turma) {
+      try {
+        const u = await pb.collection('users').getOne(params.usuarioId)
+        if (u.turma) {
+          turma = u.turma
+        }
+      } catch {
+        /* intentionally ignored */
+      }
+    }
+
+    const payload: Record<string, unknown> = {
       usuario: params.usuarioId,
       perfil: params.perfil,
       pontuacao: params.pontuacao,
       via_parte1: params.viaParte1,
-    })
+    }
+    if (turma) {
+      payload.turma = turma
+    }
+
+    const record = await pb.collection('resultados').create(payload)
 
     // Atualiza ultimo_perfil no users
     try {
@@ -98,15 +118,21 @@ export const testeService = {
     // Busca todos os resultados
     const resultados = await pb.collection('resultados').getFullList({
       sort: '-created',
+      expand: 'usuario,turma',
     })
 
     // Busca todos os usuários
     const users = await pb.collection('users').getFullList({
       sort: '-created',
+      expand: 'turma',
+    })
+
+    // Busca todas as turmas
+    const turmas = await pb.collection('turmas').getFullList({
+      sort: 'nome',
     })
 
     const totalTentativas = resultados.length
-    // Respondentes únicos com pelo menos um teste
     const respondentesUnicos = new Set(
       resultados.map((r) => (r as unknown as ResultadoRecord).usuario),
     ).size
@@ -142,7 +168,102 @@ export const testeService = {
       percentualPorPerfil,
       resultados: resultados as unknown as ResultadoRecord[],
       users: users as unknown as UserRecord[],
+      turmas: turmas as unknown as TurmaRecord[],
     }
+  },
+
+  // === Gerenciamento de Turmas ===
+  async getTurmas(): Promise<TurmaRecord[]> {
+    const list = await pb.collection('turmas').getFullList({
+      sort: 'nome',
+    })
+    return list as unknown as TurmaRecord[]
+  },
+
+  async criarTurma(data: { nome: string; data?: string }): Promise<TurmaRecord> {
+    const rec = await pb.collection('turmas').create({
+      nome: data.nome.trim(),
+      data: data.data?.trim() || '',
+    })
+    return rec as unknown as TurmaRecord
+  },
+
+  async atualizarTurma(id: string, data: { nome: string; data?: string }): Promise<TurmaRecord> {
+    const rec = await pb.collection('turmas').update(id, {
+      nome: data.nome.trim(),
+      ...(data.data !== undefined ? { data: data.data.trim() } : {}),
+    })
+    return rec as unknown as TurmaRecord
+  },
+
+  async excluirTurma(id: string): Promise<void> {
+    await pb.collection('turmas').delete(id)
+  },
+
+  // === Gerenciamento de Usuários / Participantes ===
+  async criarUsuario(data: {
+    nome: string
+    email: string
+    password?: string
+    turma?: string
+  }): Promise<UserRecord> {
+    const password = data.password && data.password.length >= 8 ? data.password : 'Mudar@123'
+    const payload: Record<string, unknown> = {
+      name: data.nome.trim(),
+      email: data.email.trim().toLowerCase(),
+      password,
+      passwordConfirm: password,
+      verified: true,
+      turma: data.turma || '',
+    }
+    const rec = await pb.collection('users').create(payload)
+    return rec as unknown as UserRecord
+  },
+
+  async atualizarUsuario(
+    id: string,
+    data: {
+      nome?: string
+      email?: string
+      turma?: string
+    },
+  ): Promise<UserRecord> {
+    const payload: Record<string, unknown> = {}
+    if (data.nome !== undefined) payload.name = data.nome.trim()
+    if (data.email !== undefined) payload.email = data.email.trim().toLowerCase()
+    if (data.turma !== undefined) payload.turma = data.turma || ''
+
+    const rec = await pb.collection('users').update(id, payload, {
+      expand: 'turma',
+    })
+    return rec as unknown as UserRecord
+  },
+
+  async excluirUsuario(id: string): Promise<void> {
+    // Exclui respostas e resultados associados ao usuário para manter consistência
+    try {
+      const resultados = await pb.collection('resultados').getFullList({
+        filter: `usuario = "${id}"`,
+      })
+      for (const res of resultados) {
+        await pb.collection('resultados').delete(res.id)
+      }
+    } catch {
+      /* intentionally ignored */
+    }
+
+    try {
+      const respostas = await pb.collection('respostas').getFullList({
+        filter: `usuario = "${id}"`,
+      })
+      for (const resp of respostas) {
+        await pb.collection('respostas').delete(resp.id)
+      }
+    } catch {
+      /* intentionally ignored */
+    }
+
+    await pb.collection('users').delete(id)
   },
 
   // Busca lista de respondentes enriquecida
@@ -177,7 +298,9 @@ export const testeService = {
 
   // Busca detalhes de um usuário específico para tela de detalhes do admin
   async getDetalhesUsuario(userId: string) {
-    const user = (await pb.collection('users').getOne(userId)) as unknown as UserRecord
+    const user = (await pb.collection('users').getOne(userId, {
+      expand: 'turma',
+    })) as unknown as UserRecord
     const resultados = (await pb.collection('resultados').getFullList({
       filter: `usuario = "${userId}"`,
       sort: '-created',

@@ -3,19 +3,19 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/use-auth'
 import { testeService } from '@/services/testeService'
 import { PERFIS_INFO } from '@/types/cronotipo'
-import type { ResultadoRecord, RespostaRecord, UserRecord } from '@/types/cronotipo'
+import type { ResultadoRecord, RespostaRecord, UserRecord, TurmaRecord } from '@/types/cronotipo'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
   ArrowLeft,
   Calendar,
-  Award,
   User,
   Mail,
   Shield,
   Loader2,
   Clock,
   LogOut,
+  GraduationCap,
 } from 'lucide-react'
 
 export default function AdminRespondenteDetalhePage() {
@@ -88,6 +88,7 @@ export default function AdminRespondenteDetalhePage() {
     month: 'long',
     year: 'numeric',
   })
+  const turmaNome = user.expand?.turma?.nome || 'Sem turma'
 
   // Agrupa respostas por parte
   const respostasParte1 = respostas.filter((r) => r.parte === '1')
@@ -142,17 +143,22 @@ export default function AdminRespondenteDetalhePage() {
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-4 text-xs text-[#2B2621]/70">
+              <div className="flex items-center gap-4 text-xs text-[#2B2621]/70 flex-wrap">
                 <span className="flex items-center gap-1">
                   <Mail className="w-3.5 h-3.5 text-[#E55320]" />
                   {user.email}
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
+                  <GraduationCap className="w-3.5 h-3.5 text-[#E55320]" />
+                  Turma: <strong className="text-[#2B2621]">{turmaNome}</strong>
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-[#E55320]" />
                   Cadastrado em {dataCadastroFormatada}
                 </span>
-              </div>
+              </div>{' '}
             </div>
           </div>
 
